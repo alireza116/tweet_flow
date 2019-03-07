@@ -1,7 +1,7 @@
 # geoTweet Flow
 function to calculate shortest paths for tweet users on street networks
 
-These functions are to acompany with the paper Bridging the "Bridging the information and physical space: Measuring flow from geo-located social media data on the street network".
+These functions are to acompany with the paper Bridging the "Bridging the information and physical space: Measuring flow from geo-located social media data on the street network" to be published at Computers for Urban Planning and Management 2019 (CUPUM 2019).
 
 The purpose of these is to help users extract shortest paths between consecutive tweet locations on top of a street netwrok.
 
