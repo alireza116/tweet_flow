@@ -14,29 +14,30 @@ import pandas as pd
 
 
 
+# add an edgelist csvFIle for the city of choice.
 with open("losangeles/LosAngeles_Edgelist.csv") as edgeListFile:
     csvReader = csv.DictReader(edgeListFile)
     edgelist = [i for i in csvReader]
 
-
+#read shapefiles for nodes in the network.
 shapeNodes = fiona.open("losangeles/laNodesWGS.shp")
 idPointDict = {p["properties"]["OBJECTID"]:p["geometry"]["coordinates"] for p in shapeNodes}
 
-
+#read shapefiles for nodes and edges.
 nodes = geopandas.read_file("losangeles/laNodesWGS.shp")
 edges = geopandas.read_file("losangeles/laLinksWGS.shp")
 
-
+#create a dictionary for edgeID edgeLinestring
 shapeEdges = fiona.open("losangeles/laLinksWGS.shp")
 edgeDict = {e["properties"]["OBJECTID"]:LineString(e["geometry"]["coordinates"]) for e in shapeEdges} 
 
-
+#read tweets, here it is in the format of a shapefile.
 tweets = geopandas.read_file("losangeles/losangeles.shp")
 
 
 userNames = tweets["userName"].unique()
 
-
+#function for finding closest node on the graph to a tweet location
 def ckdnearest(gdA, gdB, bcol):   
     nA = np.array(list(zip(gdA.geometry.x, gdA.geometry.y)) )
     nB = np.array(list(zip(gdB.geometry.x, gdB.geometry.y)) )
